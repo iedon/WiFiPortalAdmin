@@ -1,0 +1,118 @@
+﻿@model PaginatedList<iEdonNetPortal.Models.Logs>
+@{
+    ViewData["Title"] = "列表";
+}
+
+<h2>列表</h2>
+
+<p>
+    <a asp-action="Create">新建</a>
+</p>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+<a asp-action="Index"
+   asp-route-page="@(Model.PageIndex - 1)" asp-route-sortOrder="@ViewData["SortOrder"]"
+   class="btn btn-light @prevDisabled">
+    上一页
+</a>
+<a asp-action="Index"
+   asp-route-page="@(Model.PageIndex + 1)" asp-route-sortOrder="@ViewData["SortOrder"]"
+   class="btn btn-light @nextDisabled">
+    下一页
+</a>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="user">@Html.DisplayNameFor(model => model[0].U)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="action">@Html.DisplayNameFor(model => model[0].Action)</a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Log)
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="date">@Html.DisplayNameFor(model => model[0].Date)</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.U.User)
+                </td>
+                <td>
+                    @{
+                        var actionString = "";
+                        switch (item.Action)
+                        {
+                            case 0:
+                                actionString = "未定义";
+                                break;
+                            case 1:
+                                actionString = "登录";
+                                break;
+                            case 2:
+                                actionString = "注销";
+                                break;
+                            case 3:
+                                actionString = "计费";
+                                break;
+                            case 4:
+                                actionString = "注册";
+                                break;
+                            default:
+                                actionString = "其他";
+                                break;
+                        }
+                    }
+                    @Html.DisplayFor(modelItem => actionString)
+                </td>
+                <td>
+                    @{
+                        var log = item.Log;
+                        log = log.Replace("logged in", "登录了");
+                        log = log.Replace("device mac", "设备MAC");
+                        log = log.Replace("auto dc", "空闲超时下线");
+                        log = log.Replace("logged out", "注销了");
+                        log = log.Replace("all devices", "所有设备");
+                        log = log.Replace("set offline", "标记帐户为离线状态");
+                        log = log.Replace("created user", "新注册用户");
+                        log = log.Replace("for ip", "来源IP");
+                        log = log.Replace("invalid user or password", "错误的用户名或密码");
+                        log = log.Replace("manually", "手动");
+                    }
+                    @Html.DisplayFor(modelItem => log)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">编辑</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">详细信息</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">删除</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Index"
+   asp-route-page="@(Model.PageIndex - 1)" asp-route-sortOrder="@ViewData["SortOrder"]"
+   class="btn btn-light @prevDisabled">
+    上一页
+</a>
+<a asp-action="Index"
+   asp-route-page="@(Model.PageIndex + 1)" asp-route-sortOrder="@ViewData["SortOrder"]"
+   class="btn btn-light @nextDisabled">
+    下一页
+</a>

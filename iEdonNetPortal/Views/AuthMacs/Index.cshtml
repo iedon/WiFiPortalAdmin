@@ -1,0 +1,93 @@
+﻿@model PaginatedList<iEdonNetPortal.Models.AuthMacs>
+
+@{
+    ViewData["Title"] = "列表";
+}
+
+<h2>列表</h2>
+
+<p>
+    <a asp-action="Create">新建</a>
+</p>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+<a asp-action="Index"
+   asp-route-page="@(Model.PageIndex - 1)" asp-route-sortOrder="@ViewData["SortOrder"]"
+   class="btn btn-light @prevDisabled">
+    上一页
+</a>
+<a asp-action="Index"
+   asp-route-page="@(Model.PageIndex + 1)" asp-route-sortOrder="@ViewData["SortOrder"]"
+   class="btn btn-light @nextDisabled">
+    下一页
+</a>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="user">@Html.DisplayNameFor(model => model[0].U)</a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Mac)
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="traffic">@Html.DisplayNameFor(model => model[0].Traffic)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="date">@Html.DisplayNameFor(model => model[0].Date)</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.U.User)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mac)
+                </td>
+                <td>
+                    @{
+                        double traffic = (double)item.Traffic;
+                        string[] sizes = { "B", "KB", "MB", "GB", "TB" };
+                        int order = 0;
+                        while (traffic >= 1024 && order < sizes.Length - 1)
+                        {
+                            order++;
+                            traffic = traffic / 1024;
+                        }
+                        string result = String.Format("{0:0.###} {1}", traffic, sizes[order]);
+                    }
+                    @Html.DisplayFor(modelItem => result)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">编辑</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">详细信息</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">删除</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Index"
+   asp-route-page="@(Model.PageIndex - 1)" asp-route-sortOrder="@ViewData["SortOrder"]"
+   class="btn btn-light @prevDisabled">
+    上一页
+</a>
+<a asp-action="Index"
+   asp-route-page="@(Model.PageIndex + 1)" asp-route-sortOrder="@ViewData["SortOrder"]"
+   class="btn btn-light @nextDisabled">
+    下一页
+</a>

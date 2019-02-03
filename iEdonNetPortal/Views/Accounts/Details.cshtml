@@ -1,0 +1,66 @@
+﻿@model iEdonNetPortal.Models.Accounts
+
+@{
+    ViewData["Title"] = "详细信息";
+}
+
+<h2>详细信息</h2>
+
+<div>
+    <h4>帐户管理</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.User)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Online)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Online)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Credit)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Credit)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Lastlogin)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Lastlogin)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Lastip)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Lastip)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Uid">编辑</a> |
+    <a asp-action="Index">返回列表</a>
+</div>

@@ -1,0 +1,118 @@
+﻿@model PaginatedList<iEdonNetPortal.Models.Accounts>
+
+@{
+    ViewData["Title"] = "列表";
+}
+
+<h2>列表</h2>
+
+<p>
+    <a asp-action="Create">新建</a>
+</p>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+<a asp-action="Index"
+   asp-route-page="@(Model.PageIndex - 1)" asp-route-sortOrder="@ViewData["SortOrder"]"
+   class="btn btn-light @prevDisabled">
+    上一页
+</a>
+<a asp-action="Index"
+   asp-route-page="@(Model.PageIndex + 1)" asp-route-sortOrder="@ViewData["SortOrder"]"
+   class="btn btn-light @nextDisabled">
+    下一页
+</a>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="user">@Html.DisplayNameFor(model => model[0].User)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="name">@Html.DisplayNameFor(model => model[0].Name)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="online">@Html.DisplayNameFor(model => model[0].Online)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="credit">@Html.DisplayNameFor(model => model[0].Credit)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="email">@Html.DisplayNameFor(model => model[0].Email)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="lastlogin">@Html.DisplayNameFor(model => model[0].Lastlogin)</a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Lastip)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            @if (item.Uid == 0) { continue; } // 排除 root 用户
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td style="text-align:center">
+                    <span style="font-weight:bold;color:green;font-size:25px;line-height:15px">
+                        @{
+                            var onlineString = "";
+                            switch (item.Online)
+                            {
+                                case 0:
+                                    onlineString = "";
+                                    break;
+                                case 1:
+                                    onlineString = "●";
+                                    break;
+                                default:
+                                    onlineString = "未知";
+                                    break;
+                            }
+                        }
+                        @Html.DisplayFor(modelItem => onlineString)
+                    </span>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Credit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lastlogin)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lastip)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Uid">编辑</a> |
+                    <a asp-action="Details" asp-route-id="@item.Uid">详细信息</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Uid">删除</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Index"
+   asp-route-page="@(Model.PageIndex - 1)" asp-route-sortOrder="@ViewData["SortOrder"]"
+   class="btn btn-light @prevDisabled">
+    上一页
+</a>
+<a asp-action="Index"
+   asp-route-page="@(Model.PageIndex + 1)" asp-route-sortOrder="@ViewData["SortOrder"]"
+   class="btn btn-light @nextDisabled">
+    下一页
+</a>

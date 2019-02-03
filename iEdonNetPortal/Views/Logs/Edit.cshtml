@@ -1,0 +1,49 @@
+﻿@model iEdonNetPortal.Models.Logs
+
+@{
+    ViewData["Title"] = "编辑";
+}
+
+<h2>编辑</h2>
+
+<h4>日志管理</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Uid" class="control-label"></label>
+                <select asp-for="Uid" class="form-control" asp-items="ViewBag.Uid"></select>
+                <span asp-validation-for="Uid" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Action" class="control-label"></label>
+                <select class="form-control" asp-for="Action" asp-items="@Html.GetEnumSelectList(typeof(Logs.EnumLogAction))"></select>
+                <span asp-validation-for="Action" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Log" class="control-label"></label>
+                <input asp-for="Log" class="form-control" />
+                <span asp-validation-for="Log" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="保存" class="btn btn-lg btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">返回列表</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

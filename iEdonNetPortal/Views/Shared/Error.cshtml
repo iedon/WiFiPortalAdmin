@@ -1,0 +1,15 @@
+﻿@model ErrorViewModel
+@{
+    ViewData["Title"] = "错误";
+}
+
+<h1 class="text-danger">服务器错误</h1>
+<h2 class="text-danger">在处理请求时发生了错误。</h2>
+
+@if (Model.ShowRequestId)
+{
+    <p>
+        <strong>请求 ID:</strong> <code>@Model.RequestId</code>
+    </p>
+}
+

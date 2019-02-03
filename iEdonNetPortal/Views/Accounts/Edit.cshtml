@@ -1,0 +1,69 @@
+﻿@model iEdonNetPortal.Models.Accounts
+
+@{
+    ViewData["Title"] = "编辑";
+}
+
+<h2>编辑</h2>
+
+<h4>帐户管理</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Uid" />
+            <div class="form-group">
+                <label asp-for="User" class="control-label"></label>
+                <input asp-for="User" class="form-control" />
+                <span asp-validation-for="User" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Online" class="control-label"></label>
+                <select class="form-control" asp-for="Online" asp-items="@Html.GetEnumSelectList(typeof(Accounts.EnumAccountOnline))"></select>
+                <span asp-validation-for="Online" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Credit" class="control-label"></label>
+                <input asp-for="Credit" class="form-control" />
+                <span asp-validation-for="Credit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Lastlogin" class="control-label"></label>
+                <input asp-for="Lastlogin" class="form-control" />
+                <span asp-validation-for="Lastlogin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Lastip" class="control-label"></label>
+                <input asp-for="Lastip" class="form-control" />
+                <span asp-validation-for="Lastip" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="保存" class="btn btn-lg btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">返回列表</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

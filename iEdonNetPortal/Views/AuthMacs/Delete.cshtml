@@ -1,0 +1,45 @@
+﻿@model iEdonNetPortal.Models.AuthMacs
+
+@{
+    ViewData["Title"] = "删除";
+}
+
+<h2>删除</h2>
+
+<h3>真的确定要删除吗？</h3>
+<div>
+    <h4>认证MAC表</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Mac)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Mac)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Traffic)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Traffic)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.U)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.U.User)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="删除" class="btn btn-lg btn-primary" /> |
+        <a asp-action="Index">返回列表</a>
+    </form>
+</div>

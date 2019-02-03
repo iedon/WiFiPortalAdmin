@@ -1,0 +1,15 @@
+﻿@model iEdonNetPortal.Models.LoginViewModel;
+@{
+    ViewData["Title"] = "管理员登录";
+}
+
+
+<div class="text-center">
+    <form class="signin" method="post">
+        <img class="mb-4" src="~/images/logo.png" alt="" width="72" height="72">
+        <h3 class="h3 mb-3 font-weight-normal">@ViewData["Message"]</h3>
+        <input asp-for="Username" type="text" class="form-control" placeholder="请输入用户名" />
+        <input asp-for="Password" type="password" class="form-control" placeholder="请输入密码" />
+        <button type="submit" class="btn btn-lg btn-primary btn-block">登录</button>
+    </form>
+</div>

@@ -1,0 +1,42 @@
+﻿@model iEdonNetPortal.Models.Logs
+
+@{
+    ViewData["Title"] = "详细信息";
+}
+
+<h2>详细信息</h2>
+
+<div>
+    <h4>日志管理</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Action)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Action)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Log)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Log)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.U)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.U.User)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">编辑</a> |
+    <a asp-action="Index">返回列表</a>
+</div>
